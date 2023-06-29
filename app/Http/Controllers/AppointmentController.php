@@ -13,7 +13,14 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        $appointment = Appointment::where('appointments.userId', $user->id)
+            ->join('doctors', 'doctors.id', '=', 'appointments.userId')
+            ->select('appointments.*', 'doctors.name as doctorName', 'doctors.specialist')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        return view('user.view-Appointment', compact('appointment'));
     }
 
     /**
@@ -46,10 +53,10 @@ class AppointmentController extends Controller
             $newAppoinment->userId = $user->id;
             $newAppoinment->appoinmentDate = $request->appointmentDate;
             $newAppoinment->doctorId = $request->doctor;
+            $newAppoinment->status = 'IN Progress';
             $newAppoinment->description = $request->description;
             $newAppoinment->save();
             return back()->with('message', 'Appointment Created Succesfully. We will Inform You after Accepting Your Appointment.');
-
         } catch (Exception $exception) {
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
@@ -83,8 +90,21 @@ class AppointmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $user = auth()->user();
+
+            $appointment = Appointment::find($request->id);
+            $appointment->status = 'Canceled';
+            $appointment->save();
+
+            return back()->with('message', 'Appointment Canceled Succesfully.');
+
+        } catch (Exception $exception) {
+            dd($exception);
+            $getTheErrorMessage = $exception->getPrevious();
+            return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
+        }
     }
 }
