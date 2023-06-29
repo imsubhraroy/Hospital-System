@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/home', [HomeController::class, 'home'])->name('/home');
+Route::get('/', [HomeController::class, 'index']);
+
+Route::middleware([
+    'auth:sanctum'
+])->group(function () {
+    Route::get('/add-doctor-view', [DoctorController::class, 'create']);
+    Route::post('/add-doctor', [DoctorController::class, 'store']);
+
+    Route::post('create-appointment', [AppointmentController::class, 'store']);
 });
