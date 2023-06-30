@@ -67,8 +67,8 @@
         }
 
         function closeMsg(){
-            document.getElementById("doctorMsg").classList.toggle('hidden');
-            document.getElementById("doctorMsg").classList.toggle('flex');
+            document.getElementById("msg").classList.toggle('hidden');
+            document.getElementById("msg").classList.toggle('flex');
         }
 
     </script>

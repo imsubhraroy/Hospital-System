@@ -16,11 +16,22 @@ class AppointmentController extends Controller
         $user = auth()->user();
 
         $appointment = Appointment::where('appointments.userId', $user->id)
-            ->join('doctors', 'doctors.id', '=', 'appointments.userId')
+            ->join('doctors', 'doctors.id', '=', 'appointments.doctorId')
             ->select('appointments.*', 'doctors.name as doctorName', 'doctors.specialist')
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('user.view-Appointment', compact('appointment'));
+    }
+
+    public function index2()
+    {
+
+        $appointment = Appointment::join('doctors', 'doctors.id', '=', 'appointments.userId')
+            ->select('appointments.*', 'doctors.name as doctorName', 'doctors.specialist' , 'doctors.visit')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return view('admin.appointment', compact('appointment'));
     }
 
     /**
@@ -90,17 +101,45 @@ class AppointmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function approve(Request $request)
     {
         try {
-            $user = auth()->user();
+
+            $appointment = Appointment::find($request->id);
+            $appointment->status = 'Approved';
+            $appointment->save();
+
+            return back()->with('message', 'Appointment Approved.');
+        } catch (Exception $exception) {
+            dd($exception);
+            $getTheErrorMessage = $exception->getPrevious();
+            return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
+        }
+    }
+
+    public function cancel(Request $request)
+    {
+        try {
 
             $appointment = Appointment::find($request->id);
             $appointment->status = 'Canceled';
             $appointment->save();
 
             return back()->with('message', 'Appointment Canceled Succesfully.');
+        } catch (Exception $exception) {
+            dd($exception);
+            $getTheErrorMessage = $exception->getPrevious();
+            return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
+        }
+    }
+    public function destroy(Request $request)
+    {
+        try {
 
+            $appointment = Appointment::find($request->id);
+            $appointment->delete();
+
+            return back()->with('message', 'Appointment Deleted Succesfully.');
         } catch (Exception $exception) {
             dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
