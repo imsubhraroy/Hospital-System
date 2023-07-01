@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SpecialistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/home', [HomeController::class, 'home'])->name('/home');
+Route::get('/home', [HomeController::class, 'home'])->name('/home')->middleware('auth', 'verified');
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/doctors', [DoctorController::class, 'index']);
@@ -56,9 +57,16 @@ Route::middleware([
         Route::get('/view-contact', [ContactController::class, 'index2']);
         Route::get('/delete-contact/{id}', [ContactController::class, 'destroy']);
 
+        Route::get('/add-specialist-view', [SpecialistController::class, 'create']);
+        Route::post('/add-specialist', [SpecialistController::class, 'store']);
+        Route::get('/edit-specialist/{id}', [SpecialistController::class, 'show']);
+        Route::post('/update-specialist/{id}', [SpecialistController::class, 'update']);
+        Route::get('/delete-specialist/{id}', [SpecialistController::class, 'destroy']);
+
     });
 
 
+    Route::get('/view-specialists', [SpecialistController::class, 'index']);
     Route::get('/my-appointment', [AppointmentController::class, 'index']);
     Route::post('/create-appointment', [AppointmentController::class, 'store']);
     Route::post('/create-contact', [ContactController::class, 'store']);

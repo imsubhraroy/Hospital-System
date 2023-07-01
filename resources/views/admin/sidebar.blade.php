@@ -23,11 +23,54 @@
             <li>
                 <div>
                     <div class="sidebar-title flex items-center justify-between p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 px-3"
+                        onclick="dropDownBTN1()">
+                        <div class="flex justify-center items-center font-medium text-base">
+                            <i class="fa-sharp fa-solid fa-user-tie w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-xl -mt-2"></i>
+                            <div
+                                class="ml-2 hidden lg:block  sidebar-item" id="item2">
+                                Specialist
+                            </div>
+                        </div>
+                        <span class="-rotate-90 transition-all duration-150 hidden lg:flex justify-center items-center" id="arrow1">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </span>
+                    </div>
+                    <!-- sub route  -->
+                    <div class="sidebar-conten p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 bg-gray-700 dark:hover:bg-gray-600 px-3 hidden"
+                        id="submenu1">
+                        <a href="{{ url('add-specialist-view') }}" class="flex items-center font-medium text-sm">
+                            <div
+                                class="flex w-full items-center pl-8 py-2 rounded-md dark:hover:bg-gray-800">
+                                <span class="pr-3 text-sm flex justify-center items-center">
+                                    <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                </span>
+                                <div
+                                    class="transition-all duration-300 whitespace-nowrap overflow-ellipsis overflow-hidden">
+                                    Add Specialist</div>
+                            </div>
+                        </a>
+                        <a href="{{ url('/view-specialists') }}" class="flex items-center font-medium text-sm">
+                            <div
+                                class="flex w-full items-center pl-8 py-2 rounded-md dark:hover:bg-gray-800">
+                                <span class="pr-3 text-sm flex justify-center items-center">
+                                    <i class="fa-sharp fa-solid fa-user-tie"></i>
+                                </span>
+                                <div
+                                    class="transition-all duration-300 whitespace-nowrap overflow-ellipsis overflow-hidden">
+                                    View Specialist</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="sidebar-title flex items-center justify-between p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 px-3"
                         onclick="dropDownBTN()">
                         <div class="flex justify-center items-center font-medium text-base">
-                            <i class="fa-solid fa-user w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-xl -mt-2"></i>
+                            <i class="fa-solid fa-user-doctor w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-xl -mt-2"></i>
                             <div
-                                class="ml-2 hidden lg:block  sidebar-item">
+                                class="ml-2 hidden lg:block  sidebar-item" id="item3">
                                 Doctor
                             </div>
                         </div>
@@ -42,7 +85,7 @@
                             <div
                                 class="flex w-full items-center pl-8 py-2 rounded-md dark:hover:bg-gray-800">
                                 <span class="pr-3 text-sm flex justify-center items-center">
-                                    <i class="fa-solid fa-user"></i>
+                                    <i class="fa-solid fa-user-doctor"></i>
                                 </span>
                                 <div
                                     class="transition-all duration-300 whitespace-nowrap overflow-ellipsis overflow-hidden">
@@ -53,7 +96,7 @@
                             <div
                                 class="flex w-full items-center pl-8 py-2 rounded-md dark:hover:bg-gray-800">
                                 <span class="pr-3 text-sm flex justify-center items-center">
-                                    <i class="fa-solid fa-user"></i>
+                                    <i class="fa-solid fa-user-doctor"></i>
                                 </span>
                                 <div
                                     class="transition-all duration-300 whitespace-nowrap overflow-ellipsis overflow-hidden">
@@ -66,37 +109,22 @@
             <li>
                 <a href="{{ url('/view-appointment') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg aria-hidden="true"
-                        class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                    </svg>
-                    <span class="ml-3 hidden lg:block" id="item1">Appointment</span>
+                    <i class="fa-solid fa-calendar-check w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-xl -mt-2"></i>
+                    <span class="ml-3 hidden lg:block" id="item4">Appointment</span>
                 </a>
             </li>
             <li>
                 <a href="{{ url('/view-users') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg aria-hidden="true"
-                        class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                    </svg>
-                    <span class="ml-3 hidden lg:block" id="item1">User</span>
+                    <i class="fa-solid fa-user w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-xl -mt-2"></i>
+                    <span class="ml-3 hidden lg:block" id="item5">User</span>
                 </a>
             </li>
             <li>
                 <a href="{{ url('/view-contact') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg aria-hidden="true"
-                        class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                    </svg>
-                    <span class="ml-3 hidden lg:block" id="item1">Contact</span>
+                    <i class="fa-solid fa-id-card-clip w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white text-xl -mt-2"></i>
+                    <span class="ml-3 hidden lg:block" id="item6">Contact</span>
                 </a>
             </li>
         </ul>

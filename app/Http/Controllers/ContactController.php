@@ -28,7 +28,6 @@ class ContactController extends Controller
 
             return back()->with('message', 'Contact Deleted Succesfully.');
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }

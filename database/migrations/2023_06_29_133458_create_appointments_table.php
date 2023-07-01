@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('status')->default(0);
             $table->string('name');
             $table->string('email')->nullable();
-            $table->string('appoinmentDate');
+            $table->date('appoinmentDate');
             $table->unsignedBigInteger('doctorId');
             $table->string('phone');
             $table->text('description')->nullable();

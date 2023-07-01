@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Specialist;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('admin.doctor.add-doctor');
+        $specialists = Specialist::all();
+        return view('admin.doctor.add-doctor' , compact('specialists'));
     }
 
     /**
@@ -40,6 +42,7 @@ class DoctorController extends Controller
             'name' => 'required',
             'phone' => 'required|numeric',
             'price' => 'required',
+            'degree' => 'required',
             'registration' => 'required',
             'speciality' => 'required'
         ]);
@@ -54,6 +57,7 @@ class DoctorController extends Controller
                 $newDoctor->name = $request->name;
                 $newDoctor->phone = $request->phone;
                 $newDoctor->room = $request->room;
+                $newDoctor->degree = $request->degree;
                 $newDoctor->visit = $request->price;
                 $newDoctor->registration = $request->registration;
                 $newDoctor->specialist = $request->speciality;
@@ -81,9 +85,9 @@ class DoctorController extends Controller
     {
         try {
             $doctor = Doctor::find($id);
-            return view('admin.doctor.edit-doctor', compact('doctor'));
+            $specialists = Specialist::all();
+            return view('admin.doctor.edit-doctor', compact('doctor','specialists'));
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }
@@ -106,6 +110,7 @@ class DoctorController extends Controller
             'name' => 'required',
             'phone' => 'required|numeric',
             'price' => 'required',
+            'degree' => 'required',
             'registration' => 'required',
             'speciality' => 'required'
         ]);
@@ -116,6 +121,7 @@ class DoctorController extends Controller
                 $doctor->name = $request->name;
                 $doctor->phone = $request->phone;
                 $doctor->room = $request->room;
+                $doctor->degree = $request->degree;
                 $doctor->visit = $request->price;
                 $doctor->registration = $request->registration;
                 $doctor->specialist = $request->speciality;
@@ -148,7 +154,6 @@ class DoctorController extends Controller
 
             return back()->with('message', 'Doctor Deleted Succesfully.');
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }

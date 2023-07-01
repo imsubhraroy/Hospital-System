@@ -11,11 +11,9 @@
                 <div class="grid grid-cols-12 gap-6">
 
                     @include('admin.card')
-                    @include('admin.card')
-                    @include('admin.card')
 
                     @include('admin.table')
-                    @include('admin.customer')
+                    {{-- @include('admin.customer') --}}
                 </div>
 
             </main>

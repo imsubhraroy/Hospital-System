@@ -23,7 +23,6 @@ class UserController extends Controller
 
             return back()->with('message', 'User Deleted Succesfully.');
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }

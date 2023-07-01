@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\User;
+use App\Notifications\AppointmentNotification;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class AppointmentController extends Controller
 {
@@ -26,8 +31,8 @@ class AppointmentController extends Controller
     public function index2()
     {
 
-        $appointment = Appointment::join('doctors', 'doctors.id', '=', 'appointments.userId')
-            ->select('appointments.*', 'doctors.name as doctorName', 'doctors.specialist' , 'doctors.visit')
+        $appointment = Appointment::join('doctors', 'doctors.id', '=', 'appointments.doctorId')
+            ->select('appointments.*', 'doctors.name as doctorName', 'doctors.specialist', 'doctors.visit')
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -109,9 +114,22 @@ class AppointmentController extends Controller
             $appointment->status = 'Approved';
             $appointment->save();
 
+            $user = User::find($appointment->userId);
+            $doctor = Doctor::find($appointment->doctorId);
+
+            $details = [
+                'gretting' => 'Hello ' . $user->name,
+                'body' => 'Your Appointment on ' . $appointment->appoinmentDate . ' with Dr. ' . $doctor->name . ' Specialist in ' . $doctor->specialist . ' Approve. We hope you have a great day.',
+                'actionText' => 'View Appointment',
+                'actionUrl' => 'http://127.0.0.1:8000/my-appointment',
+                'endPart' => 'Thanks from MeHealth'
+            ];
+
+            Notification::route('mail', $user->email)
+                ->notify(new AppointmentNotification($details));
+
             return back()->with('message', 'Appointment Approved.');
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }
@@ -125,9 +143,25 @@ class AppointmentController extends Controller
             $appointment->status = 'Canceled';
             $appointment->save();
 
+            $user = User::find($appointment->userId);
+            $doctor = Doctor::find($appointment->doctorId);
+
+            if (Auth::user()->usertype == '1') {
+
+                $details = [
+                    'gretting' => 'Hello ' . $user->name,
+                    'body' => 'Your Appointment on ' . $appointment->appoinmentDate . ' with Dr. ' . $doctor->name . ' Specialist in ' . $doctor->specialist . ' Cancel because all the slots are booked on that day. Try to book an Appointment on another day. We hope you have a great day.',
+                    'actionText' => 'View Appointment',
+                    'actionUrl' => 'http://127.0.0.1:8000/my-appointment',
+                    'endPart' => 'Thanks from MeHealth'
+                ];
+
+                Notification::route('mail', $user->email)
+                    ->notify(new AppointmentNotification($details));
+            }
+
             return back()->with('message', 'Appointment Canceled Succesfully.');
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }
@@ -141,7 +175,6 @@ class AppointmentController extends Controller
 
             return back()->with('message', 'Appointment Deleted Succesfully.');
         } catch (Exception $exception) {
-            dd($exception);
             $getTheErrorMessage = $exception->getPrevious();
             return back()->with('message', $getTheErrorMessage->errorInfo[2] ?? 'Try after some time.');
         }

@@ -58,12 +58,24 @@
             document.getElementById("sidebar").classList.toggle('absolute');
             document.getElementById("arrow").classList.toggle('hidden');
             document.getElementById("arrow").classList.toggle('flex');
+            document.getElementById("arrow1").classList.toggle('hidden');
+            document.getElementById("arrow1").classList.toggle('flex');
             document.getElementById("item1").classList.toggle('hidden');
+            document.getElementById("item2").classList.toggle('hidden');
+            document.getElementById("item3").classList.toggle('hidden');
+            document.getElementById("item4").classList.toggle('hidden');
+            document.getElementById("item5").classList.toggle('hidden');
+            document.getElementById("item6").classList.toggle('hidden');
         }
 
         function dropDownBTN() {
             document.querySelector('#submenu').classList.toggle('hidden')
             document.querySelector('#arrow').classList.toggle('-rotate-90')
+        }
+
+        function dropDownBTN1() {
+            document.querySelector('#submenu1').classList.toggle('hidden')
+            document.querySelector('#arrow1').classList.toggle('-rotate-90')
         }
 
         function closeMsg(){

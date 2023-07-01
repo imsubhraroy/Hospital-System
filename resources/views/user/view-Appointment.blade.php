@@ -56,6 +56,7 @@
                             <th scope="col">Mobile</th>
                             <th scope="col">Doctor's Name</th>
                             <th scope="col">Department</th>
+                            <th scope="col">Message</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -68,6 +69,7 @@
                                 <td>{{ $appointments->phone }}</td>
                                 <td>{{ $appointments->doctorName }}</td>
                                 <td>{{ $appointments->specialist }}</td>
+                                <td>{{ $appointments->description ?? '-' }}</td>
                                 <td>{{ $appointments->status }}</td>
                                 <td><a href="{{ url('cancel-appointment/' . $appointments->id) }}"
                                         style="color: red; text-decoration: none;" onclick="return confirm('are you to cancel the appointment')">Cancel</a></td>
