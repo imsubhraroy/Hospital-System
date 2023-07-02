@@ -8,12 +8,12 @@
                         <div class="post-category">
                             <a href="#">Covid19</a>
                         </div>
-                        <a href="blog-details.html" class="post-thumb">
+                        <a href="#" class="post-thumb">
                             <img src="../assets/img/blog/blog_1.jpg" alt="">
                         </a>
                     </div>
                     <div class="body">
-                        <h5 class="post-title"><a href="blog-details.html">List of Countries without Coronavirus
+                        <h5 class="post-title"><a href="#">List of Countries without Coronavirus
                                 case</a></h5>
                         <div class="site-info">
                             <div class="avatar mr-2">
@@ -33,12 +33,12 @@
                         <div class="post-category">
                             <a href="#">Covid19</a>
                         </div>
-                        <a href="blog-details.html" class="post-thumb">
+                        <a href="#" class="post-thumb">
                             <img src="../assets/img/blog/blog_2.jpg" alt="">
                         </a>
                     </div>
                     <div class="body">
-                        <h5 class="post-title"><a href="blog-details.html">Recovery Room: News beyond the
+                        <h5 class="post-title"><a href="#">Recovery Room: News beyond the
                                 pandemic</a></h5>
                         <div class="site-info">
                             <div class="avatar mr-2">
@@ -58,12 +58,12 @@
                         <div class="post-category">
                             <a href="#">Covid19</a>
                         </div>
-                        <a href="blog-details.html" class="post-thumb">
+                        <a href="#" class="post-thumb">
                             <img src="../assets/img/blog/blog_3.jpg" alt="">
                         </a>
                     </div>
                     <div class="body">
-                        <h5 class="post-title"><a href="blog-details.html">What is the impact of eating too much
+                        <h5 class="post-title"><a href="#">What is the impact of eating too much
                                 sugar?</a></h5>
                         <div class="site-info">
                             <div class="avatar mr-2">
