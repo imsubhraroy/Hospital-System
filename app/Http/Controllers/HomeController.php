@@ -38,10 +38,9 @@ class HomeController extends Controller
             } else {
                 $totalDoctor = Doctor::count();
                 $totalAppointment = Appointment::count();
-                $totalApprovedAppointment = Appointment::where('status', 'Approved')->count();
-
                 $from = self::convertDate(true,  today());
-                $to = self::convertDate(false, today());
+                $totalApprovedAppointment = Appointment::where('status', 'Approved')->whereDate('appointments.appoinmentDate', $from)->count();
+
                 $approvedAppointment = Appointment::where('status', 'Approved')
                     ->whereDate('appointments.appoinmentDate', $from)
                     ->join('doctors', 'doctors.id', '=', 'appointments.doctorId')
