@@ -46,8 +46,8 @@
 
         <hr>
 
-        <p id="copyright">Copyright &copy; 2020 <a href="https://macodeid.com/" target="_blank">MACode
-                ID</a>.
+        <p id="copyright">Copyright &copy; 2023 <a href="https://subhra.digitalmelodic.in" target="_blank">Subhra
+                </a>.
             All right reserved</p>
     </div>
 </footer>
